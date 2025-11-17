@@ -3,11 +3,413 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/main.css" />
-    <title>Zayd.world</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>FROSTBITE - Creative Chaos</title>
   </head>
   <body>
-    <div id="app"></div>
+    <!-- Decorative floating shapes -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      <div class="absolute top-20 left-10 w-32 h-32 bg-neo-pink border-4 border-black shadow-brutal floating"></div>
+      <div class="absolute top-40 right-20 w-24 h-24 bg-neo-blue border-4 border-black rotate-45 shadow-brutal floating" style="animation-delay: -2s;"></div>
+      <div class="absolute bottom-40 left-1/4 w-20 h-20 bg-neo-green border-4 border-black rounded-full shadow-brutal floating" style="animation-delay: -4s;"></div>
+      <div class="absolute bottom-20 right-1/3 w-28 h-28 bg-neo-purple border-4 border-black shadow-brutal floating" style="animation-delay: -1s;"></div>
+      <div class="absolute top-1/2 right-10 w-16 h-16 bg-neo-orange border-4 border-black rotate-12 shadow-brutal floating" style="animation-delay: -3s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-black border-b-8 border-black">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-3xl md:text-5xl font-bold text-neo-cyan glitch tracking-tighter">
+            FROSTBITE
+          </h1>
+          <div class="hidden md:flex gap-4">
+            <a href="#notes" class="brutal-btn bg-neo-pink text-white shadow-brutal">Notes</a>
+            <a href="#writing" class="brutal-btn bg-neo-blue text-white shadow-brutal">Writing</a>
+            <a href="#recipes" class="brutal-btn bg-neo-green text-white shadow-brutal">Recipes</a>
+            <a href="#contact" class="brutal-btn bg-neo-purple text-white shadow-brutal">Contact</a>
+          </div>
+          <button id="mobile-menu-btn" class="md:hidden brutal-btn bg-neo-pink text-white shadow-brutal">
+            MENU
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-black/95 z-40 md:hidden">
+      <div class="flex flex-col items-center justify-center h-full gap-6">
+        <a href="#notes" class="text-4xl font-bold text-neo-pink hover:scale-110 transition-transform">NOTES</a>
+        <a href="#writing" class="text-4xl font-bold text-neo-blue hover:scale-110 transition-transform">WRITING</a>
+        <a href="#recipes" class="text-4xl font-bold text-neo-green hover:scale-110 transition-transform">RECIPES</a>
+        <a href="#contact" class="text-4xl font-bold text-neo-purple hover:scale-110 transition-transform">CONTACT</a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden">
+      <div class="container mx-auto z-10">
+        <div class="max-w-6xl mx-auto text-center">
+          <div class="slide-in-up">
+            <h2 class="text-7xl md:text-9xl font-bold uppercase mb-6 leading-none">
+              <span class="inline-block text-black neon-glow" style="text-shadow: 0 0 20px #FF6B9D, 0 0 40px #FF6B9D;">Creative</span>
+              <br />
+              <span class="inline-block text-neo-pink neon-glow">Chaos</span>
+              <br />
+              <span class="inline-block text-black neon-glow" style="text-shadow: 0 0 20px #4D96FF, 0 0 40px #4D96FF;">Unleashed</span>
+            </h2>
+          </div>
+
+          <div class="slide-in-up" style="animation-delay: 0.2s;">
+            <p class="text-2xl md:text-3xl font-bold mb-12 text-black">
+              Notes. Thoughts. Recipes. Random Musings.
+            </p>
+          </div>
+
+          <div class="slide-in-up flex flex-wrap gap-4 justify-center" style="animation-delay: 0.4s;">
+            <a href="#notes" class="brutal-btn bg-neo-pink text-white shadow-brutal-lg text-xl">
+              EXPLORE NOTES
+            </a>
+            <a href="#writing" class="brutal-btn bg-neo-blue text-white shadow-brutal-lg text-xl">
+              READ WRITING
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animated background grid -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="grid grid-cols-12 grid-rows-12 h-full">
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+          <div class="border border-black"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notes Section -->
+    <section id="notes" class="relative py-20 px-4 bg-neo-pink">
+      <div class="container mx-auto">
+        <div class="slide-in-left mb-16">
+          <h3 class="section-title text-white text-center">
+            NOTES
+          </h3>
+          <p class="text-center text-2xl font-bold text-black mb-4">Quick thoughts & observations</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div class="brutal-card p-6 bg-white slide-in-up">
+            <div class="bg-neo-yellow border-4 border-black p-4 mb-4 inline-block">
+              <span class="text-3xl font-bold font-mono">01</span>
+            </div>
+            <h4 class="text-2xl font-bold mb-3 uppercase">First Note</h4>
+            <p class="text-gray-700 mb-4">
+              This is where your brilliant ideas live. Capture those fleeting thoughts before they escape into the void.
+            </p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="px-3 py-1 bg-neo-cyan border-2 border-black text-xs font-bold">#IDEA</span>
+              <span class="px-3 py-1 bg-neo-orange border-2 border-black text-xs font-bold">#CREATIVE</span>
+            </div>
+          </div>
+
+          <div class="brutal-card p-6 bg-white slide-in-up" style="animation-delay: 0.1s;">
+            <div class="bg-neo-blue border-4 border-black p-4 mb-4 inline-block">
+              <span class="text-3xl font-bold font-mono text-white">02</span>
+            </div>
+            <h4 class="text-2xl font-bold mb-3 uppercase">Brain Dump</h4>
+            <p class="text-gray-700 mb-4">
+              Sometimes you just need to get everything out. No filter, no rules, just pure unfiltered thoughts.
+            </p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="px-3 py-1 bg-neo-green border-2 border-black text-xs font-bold">#THOUGHTS</span>
+              <span class="px-3 py-1 bg-neo-purple border-2 border-black text-xs font-bold">#RANDOM</span>
+            </div>
+          </div>
+
+          <div class="brutal-card p-6 bg-white slide-in-up" style="animation-delay: 0.2s;">
+            <div class="bg-neo-green border-4 border-black p-4 mb-4 inline-block">
+              <span class="text-3xl font-bold font-mono">03</span>
+            </div>
+            <h4 class="text-2xl font-bold mb-3 uppercase">Daily Musings</h4>
+            <p class="text-gray-700 mb-4">
+              Every day brings new perspectives. Document them, cherish them, learn from them.
+            </p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="px-3 py-1 bg-neo-pink border-2 border-black text-xs font-bold">#DAILY</span>
+              <span class="px-3 py-1 bg-neo-yellow border-2 border-black text-xs font-bold">#LIFE</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12 slide-in-up">
+          <button class="brutal-btn bg-black text-neo-yellow shadow-brutal-xl text-xl">
+            VIEW ALL NOTES →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Writing Section -->
+    <section id="writing" class="relative py-20 px-4 bg-neo-blue">
+      <div class="container mx-auto">
+        <div class="slide-in-right mb-16">
+          <h3 class="section-title text-white text-center">
+            WRITING
+          </h3>
+          <p class="text-center text-2xl font-bold text-black mb-4">Long-form thoughts & stories</p>
+        </div>
+
+        <div class="max-w-5xl mx-auto space-y-8">
+          <article class="brutal-card p-8 bg-white slide-in-left">
+            <div class="flex flex-col md:flex-row gap-6">
+              <div class="flex-shrink-0">
+                <div class="w-32 h-32 bg-neo-purple border-4 border-black flex items-center justify-center">
+                  <span class="text-5xl">📝</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-3xl font-bold mb-2 uppercase hover:text-neo-pink transition-colors cursor-pointer">
+                  The Art of Creative Destruction
+                </h4>
+                <p class="text-gray-600 mb-4 font-mono text-sm">Published: November 17, 2025</p>
+                <p class="text-gray-700 mb-4 text-lg">
+                  Sometimes you need to break things apart to rebuild them better. A deep dive into the creative process and why chaos is necessary for innovation.
+                </p>
+                <button class="brutal-btn bg-neo-pink text-white shadow-brutal">
+                  READ MORE →
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="brutal-card p-8 bg-white slide-in-right">
+            <div class="flex flex-col md:flex-row gap-6">
+              <div class="flex-shrink-0">
+                <div class="w-32 h-32 bg-neo-cyan border-4 border-black flex items-center justify-center">
+                  <span class="text-5xl">🚀</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-3xl font-bold mb-2 uppercase hover:text-neo-blue transition-colors cursor-pointer">
+                  Building in Public
+                </h4>
+                <p class="text-gray-600 mb-4 font-mono text-sm">Published: November 15, 2025</p>
+                <p class="text-gray-700 mb-4 text-lg">
+                  Why hiding your work until it's perfect is overrated. Embrace the messiness and share your journey.
+                </p>
+                <button class="brutal-btn bg-neo-blue text-white shadow-brutal">
+                  READ MORE →
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="brutal-card p-8 bg-white slide-in-left">
+            <div class="flex flex-col md:flex-row gap-6">
+              <div class="flex-shrink-0">
+                <div class="w-32 h-32 bg-neo-orange border-4 border-black flex items-center justify-center">
+                  <span class="text-5xl">💭</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-3xl font-bold mb-2 uppercase hover:text-neo-orange transition-colors cursor-pointer">
+                  Thoughts on Design Systems
+                </h4>
+                <p class="text-gray-600 mb-4 font-mono text-sm">Published: November 10, 2025</p>
+                <p class="text-gray-700 mb-4 text-lg">
+                  Design systems don't have to be boring. Here's how to add personality while maintaining consistency.
+                </p>
+                <button class="brutal-btn bg-neo-orange text-white shadow-brutal">
+                  READ MORE →
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recipes Section -->
+    <section id="recipes" class="relative py-20 px-4 bg-neo-green">
+      <div class="container mx-auto">
+        <div class="slide-in-up mb-16">
+          <h3 class="section-title text-white text-center">
+            RECIPES
+          </h3>
+          <p class="text-center text-2xl font-bold text-black mb-4">Food for thought (and stomach)</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div class="brutal-card bg-white overflow-hidden slide-in-left">
+            <div class="bg-neo-pink h-48 border-b-4 border-black flex items-center justify-center">
+              <span class="text-8xl">🍜</span>
+            </div>
+            <div class="p-6">
+              <h4 class="text-2xl font-bold mb-3 uppercase">Midnight Ramen</h4>
+              <p class="text-gray-700 mb-4">
+                The perfect recipe for 2 AM creative sessions. Quick, delicious, and requires minimal brain power.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-mono text-sm">⏱️ 15 mins</span>
+                <button class="brutal-btn bg-neo-pink text-white shadow-brutal">
+                  COOK NOW →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="brutal-card bg-white overflow-hidden slide-in-right">
+            <div class="bg-neo-yellow h-48 border-b-4 border-black flex items-center justify-center">
+              <span class="text-8xl">☕</span>
+            </div>
+            <div class="p-6">
+              <h4 class="text-2xl font-bold mb-3 uppercase">Creative Fuel Coffee</h4>
+              <p class="text-gray-700 mb-4">
+                Not just coffee - it's liquid inspiration. The secret recipe that powers all-nighters and breakthrough moments.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-mono text-sm">⏱️ 5 mins</span>
+                <button class="brutal-btn bg-neo-yellow text-black shadow-brutal">
+                  BREW NOW →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="brutal-card bg-white overflow-hidden slide-in-left">
+            <div class="bg-neo-purple h-48 border-b-4 border-black flex items-center justify-center">
+              <span class="text-8xl">🥗</span>
+            </div>
+            <div class="p-6">
+              <h4 class="text-2xl font-bold mb-3 uppercase">Energy Bowl</h4>
+              <p class="text-gray-700 mb-4">
+                Healthy doesn't mean boring. Pack your bowl with colors, flavors, and nutrients to keep creating.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-mono text-sm">⏱️ 20 mins</span>
+                <button class="brutal-btn bg-neo-purple text-white shadow-brutal">
+                  MAKE IT →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="brutal-card bg-white overflow-hidden slide-in-right">
+            <div class="bg-neo-cyan h-48 border-b-4 border-black flex items-center justify-center">
+              <span class="text-8xl">🍰</span>
+            </div>
+            <div class="p-6">
+              <h4 class="text-2xl font-bold mb-3 uppercase">Victory Cake</h4>
+              <p class="text-gray-700 mb-4">
+                For when you ship that project. Celebrate wins big and small with this indulgent treat.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-mono text-sm">⏱️ 45 mins</span>
+                <button class="brutal-btn bg-neo-cyan text-white shadow-brutal">
+                  BAKE IT →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats/Fun Section -->
+    <section class="relative py-20 px-4 bg-black">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div class="text-center slide-in-up">
+            <div class="text-6xl font-bold text-neo-pink mb-2 font-mono">42</div>
+            <p class="text-neo-yellow uppercase font-bold">Projects</p>
+          </div>
+          <div class="text-center slide-in-up" style="animation-delay: 0.1s;">
+            <div class="text-6xl font-bold text-neo-blue mb-2 font-mono">∞</div>
+            <p class="text-neo-yellow uppercase font-bold">Ideas</p>
+          </div>
+          <div class="text-center slide-in-up" style="animation-delay: 0.2s;">
+            <div class="text-6xl font-bold text-neo-green mb-2 font-mono">24/7</div>
+            <p class="text-neo-yellow uppercase font-bold">Creating</p>
+          </div>
+          <div class="text-center slide-in-up" style="animation-delay: 0.3s;">
+            <div class="text-6xl font-bold text-neo-purple mb-2 font-mono">100%</div>
+            <p class="text-neo-yellow uppercase font-bold">Chaos</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter/Contact Section -->
+    <section id="contact" class="relative py-20 px-4 bg-neo-purple">
+      <div class="container mx-auto max-w-4xl">
+        <div class="slide-in-up mb-12">
+          <h3 class="section-title text-white text-center">
+            STAY CONNECTED
+          </h3>
+          <p class="text-center text-2xl font-bold text-black mb-4">Join the chaos</p>
+        </div>
+
+        <div class="brutal-card p-8 md:p-12 bg-white slide-in-up">
+          <form class="space-y-6">
+            <div>
+              <label class="block text-xl font-bold mb-2 uppercase">Name</label>
+              <input
+                type="text"
+                class="w-full p-4 border-4 border-black font-bold text-lg focus:outline-none focus:border-neo-pink transition-colors"
+                placeholder="YOUR NAME HERE"
+              />
+            </div>
+            <div>
+              <label class="block text-xl font-bold mb-2 uppercase">Email</label>
+              <input
+                type="email"
+                class="w-full p-4 border-4 border-black font-bold text-lg focus:outline-none focus:border-neo-blue transition-colors"
+                placeholder="YOUR@EMAIL.COM"
+              />
+            </div>
+            <div>
+              <label class="block text-xl font-bold mb-2 uppercase">Message</label>
+              <textarea
+                rows="4"
+                class="w-full p-4 border-4 border-black font-bold text-lg focus:outline-none focus:border-neo-green transition-colors resize-none"
+                placeholder="TELL ME SOMETHING INTERESTING..."
+              ></textarea>
+            </div>
+            <button type="submit" class="brutal-btn bg-neo-pink text-white shadow-brutal-xl text-xl w-full md:w-auto">
+              SEND MESSAGE →
+            </button>
+          </form>
+        </div>
+
+        <div class="mt-12 text-center slide-in-up">
+          <div class="flex justify-center gap-4 flex-wrap">
+            <a href="#" class="brutal-btn bg-neo-cyan text-white shadow-brutal">TWITTER</a>
+            <a href="#" class="brutal-btn bg-neo-pink text-white shadow-brutal">GITHUB</a>
+            <a href="#" class="brutal-btn bg-neo-orange text-white shadow-brutal">LINKEDIN</a>
+            <a href="#" class="brutal-btn bg-neo-yellow text-black shadow-brutal">INSTAGRAM</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t-8 border-neo-pink py-12 px-4">
+      <div class="container mx-auto text-center">
+        <h2 class="text-5xl font-bold text-neo-cyan mb-4 glitch">FROSTBITE</h2>
+        <p class="text-neo-yellow font-bold text-xl mb-4">WHERE CREATIVITY MEETS CHAOS</p>
+        <p class="text-white font-mono">© 2025 - Built with chaos & love</p>
+      </div>
+    </footer>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
