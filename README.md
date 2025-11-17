@@ -663,14 +663,437 @@ Use these classes in HTML to trigger scroll animations:
 - Tailwind purges unused CSS in production
 - All animations respect prefers-reduced-motion (can be added)
 
-## Deployment
+## Deployment & Hosting
 
-Build for production and deploy the `dist/` folder to:
+### Prerequisites for All Platforms
 
-- **Vercel**: `vercel deploy`
-- **Netlify**: Drag and drop `dist/` folder
-- **GitHub Pages**: Push `dist/` contents to `gh-pages` branch
-- **Any static host**: Upload `dist/` contents
+First, build your site for production:
+
+```bash
+npm run build
+```
+
+This creates a `dist/` folder with optimized, production-ready files.
+
+---
+
+### Option 1: Deploy to Vercel (Recommended)
+
+**Best for:** Easy deployment with automatic builds from Git
+
+#### Method A: Deploy from Git (Recommended)
+
+**Step 1:** Push your code to GitHub/GitLab/Bitbucket
+
+**Step 2:** Go to [vercel.com](https://vercel.com) and sign in
+
+**Step 3:** Click "Add New Project"
+
+**Step 4:** Import your repository
+
+**Step 5:** Configure build settings:
+- **Framework Preset**: Vite
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Install Command**: `npm install`
+
+**Step 6:** Click "Deploy"
+
+Your site will be live in ~60 seconds at `your-project.vercel.app`!
+
+#### Method B: Deploy with Vercel CLI
+
+**Step 1:** Install Vercel CLI
+
+```bash
+npm install -g vercel
+```
+
+**Step 2:** Login to Vercel
+
+```bash
+vercel login
+```
+
+**Step 3:** Deploy
+
+```bash
+vercel
+```
+
+**Step 4:** For production deployment
+
+```bash
+vercel --prod
+```
+
+#### Custom Domain on Vercel
+
+1. Go to your project dashboard on Vercel
+2. Click "Settings" → "Domains"
+3. Add your custom domain
+4. Update your DNS records as instructed
+5. Done! SSL certificate is automatic
+
+---
+
+### Option 2: Deploy to Netlify
+
+**Best for:** Drag-and-drop simplicity or Git-based deployment
+
+#### Method A: Drag and Drop (Easiest)
+
+**Step 1:** Build your site
+
+```bash
+npm run build
+```
+
+**Step 2:** Go to [netlify.com](https://www.netlify.com) and sign in
+
+**Step 3:** Drag and drop the `dist/` folder onto the Netlify dashboard
+
+**Step 4:** Your site is live instantly!
+
+#### Method B: Deploy from Git
+
+**Step 1:** Push your code to GitHub/GitLab/Bitbucket
+
+**Step 2:** Go to [netlify.com](https://www.netlify.com) and click "Add new site"
+
+**Step 3:** Choose "Import an existing project"
+
+**Step 4:** Connect to your Git provider
+
+**Step 5:** Configure build settings:
+- **Base directory**: (leave empty)
+- **Build command**: `npm run build`
+- **Publish directory**: `dist`
+
+**Step 6:** Click "Deploy site"
+
+#### Method C: Netlify CLI
+
+**Step 1:** Install Netlify CLI
+
+```bash
+npm install -g netlify-cli
+```
+
+**Step 2:** Build and deploy
+
+```bash
+npm run build
+netlify deploy
+```
+
+**Step 3:** For production deployment
+
+```bash
+netlify deploy --prod
+```
+
+#### Custom Domain on Netlify
+
+1. Go to "Site settings" → "Domain management"
+2. Click "Add custom domain"
+3. Enter your domain name
+4. Update DNS records as instructed
+5. SSL is automatic and free
+
+---
+
+### Option 3: Deploy to GitHub Pages
+
+**Best for:** Free hosting for open source projects
+
+#### Step 1: Install gh-pages package
+
+```bash
+npm install -D gh-pages
+```
+
+#### Step 2: Add deploy script to `package.json`
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d dist"
+  }
+}
+```
+
+#### Step 3: Update `vite.config.js` for GitHub Pages
+
+```javascript
+export default {
+  base: '/your-repo-name/', // Replace with your repo name
+  // ... rest of config
+}
+```
+
+#### Step 4: Deploy
+
+```bash
+npm run deploy
+```
+
+#### Step 5: Enable GitHub Pages
+
+1. Go to your repository on GitHub
+2. Click "Settings" → "Pages"
+3. Under "Source", select branch: `gh-pages`
+4. Click "Save"
+
+Your site will be live at `https://yourusername.github.io/your-repo-name/`
+
+#### Custom Domain on GitHub Pages
+
+1. Add a file named `CNAME` in your `public/` folder with your domain
+2. In `package.json`, update deploy script:
+   ```json
+   "deploy": "npm run build && echo 'yourdomain.com' > dist/CNAME && gh-pages -d dist"
+   ```
+3. In your DNS settings, add a CNAME record pointing to `yourusername.github.io`
+4. In GitHub Settings → Pages, add your custom domain
+
+---
+
+### Option 4: Deploy to Cloudflare Pages
+
+**Best for:** Global CDN performance and edge features
+
+#### Step 1: Push to Git
+
+Push your code to GitHub or GitLab
+
+#### Step 2: Go to Cloudflare Pages
+
+Visit [pages.cloudflare.com](https://pages.cloudflare.com)
+
+#### Step 3: Create a project
+
+1. Click "Create a project"
+2. Connect to Git
+3. Select your repository
+
+#### Step 4: Configure build
+
+- **Framework preset**: Vite
+- **Build command**: `npm run build`
+- **Build output directory**: `dist`
+
+#### Step 5: Deploy
+
+Click "Save and Deploy"
+
+Your site will be live on `*.pages.dev` with global CDN!
+
+---
+
+### Option 5: Deploy to Render
+
+**Best for:** Automatic deployments with free SSL
+
+#### Step 1: Push to GitHub
+
+Push your code to GitHub
+
+#### Step 2: Create New Static Site
+
+1. Go to [render.com](https://render.com)
+2. Click "New +" → "Static Site"
+3. Connect your repository
+
+#### Step 3: Configure
+
+- **Build Command**: `npm run build`
+- **Publish Directory**: `dist`
+
+#### Step 4: Deploy
+
+Click "Create Static Site"
+
+---
+
+### Option 6: Traditional Web Hosting (cPanel, FTP)
+
+**Best for:** Traditional shared hosting providers
+
+#### Step 1: Build locally
+
+```bash
+npm run build
+```
+
+#### Step 2: Upload files
+
+Using FTP client (FileZilla, Cyberduck, etc.):
+1. Connect to your hosting server
+2. Navigate to `public_html/` or your web root
+3. Upload ALL files from the `dist/` folder
+4. Make sure `index.html` is in the root
+
+#### Step 3: Configure (if needed)
+
+Create `.htaccess` file in root for clean URLs:
+
+```apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+```
+
+---
+
+### Option 7: Amazon S3 + CloudFront
+
+**Best for:** Scalable static hosting on AWS
+
+#### Step 1: Create S3 Bucket
+
+```bash
+aws s3 mb s3://your-bucket-name
+```
+
+#### Step 2: Build and upload
+
+```bash
+npm run build
+aws s3 sync dist/ s3://your-bucket-name
+```
+
+#### Step 3: Enable Static Website Hosting
+
+```bash
+aws s3 website s3://your-bucket-name --index-document index.html
+```
+
+#### Step 4: Set bucket policy for public access
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Sid": "PublicReadGetObject",
+    "Effect": "Allow",
+    "Principal": "*",
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::your-bucket-name/*"
+  }]
+}
+```
+
+#### Step 5: (Optional) Add CloudFront CDN
+
+Set up CloudFront distribution pointing to your S3 bucket for global performance.
+
+---
+
+### Option 8: Firebase Hosting
+
+**Best for:** Google Cloud integration
+
+#### Step 1: Install Firebase CLI
+
+```bash
+npm install -g firebase-tools
+```
+
+#### Step 2: Login and initialize
+
+```bash
+firebase login
+firebase init hosting
+```
+
+#### Step 3: Configure
+
+- Choose "Use an existing project" or create new
+- Set public directory to `dist`
+- Configure as single-page app: Yes
+- Set up automatic builds: Optional
+
+#### Step 4: Deploy
+
+```bash
+npm run build
+firebase deploy
+```
+
+---
+
+## Post-Deployment Checklist
+
+After deploying to any platform:
+
+- [ ] Test all pages and sections
+- [ ] Verify all animations work
+- [ ] Test on mobile devices
+- [ ] Check all links work
+- [ ] Test form submissions (if connected to backend)
+- [ ] Verify custom domain SSL certificate
+- [ ] Test in different browsers
+- [ ] Check console for errors
+- [ ] Verify images and fonts load
+- [ ] Test scroll performance
+
+---
+
+## Updating Your Site
+
+### For Git-based deployments (Vercel, Netlify, Cloudflare)
+
+Just push to your repository:
+
+```bash
+git add .
+git commit -m "Update content"
+git push
+```
+
+Your site will automatically rebuild and deploy!
+
+### For manual deployments
+
+1. Make your changes
+2. Build: `npm run build`
+3. Upload new `dist/` folder contents
+4. Clear browser cache to see changes
+
+---
+
+## Environment Variables
+
+If you need environment variables:
+
+### Vercel
+Add in dashboard: Settings → Environment Variables
+
+### Netlify
+Add in dashboard: Site settings → Environment variables
+
+### Local `.env` file
+Create `.env` file in root:
+
+```env
+VITE_API_KEY=your-key-here
+```
+
+Access in code:
+```javascript
+const apiKey = import.meta.env.VITE_API_KEY
+```
+
+---
 
 ## License
 
