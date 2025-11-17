@@ -1,6 +1,31 @@
 import * as THREE from 'three';
 
+/**
+ * Procedurally generated 3D character avatar that stands on the globe.
+ *
+ * Features:
+ * - Custom geometry (capsules, spheres, cylinders)
+ * - PBR materials with theme-responsive colors
+ * - Procedural face texture (canvas-based)
+ * - Idle animation (bobbing + swaying)
+ * - Dynamic color palette based on active location
+ *
+ * The avatar rotates counter to the globe so it always faces forward,
+ * creating the illusion of walking around the planet.
+ *
+ * @example
+ * ```javascript
+ * const avatar = new Avatar();
+ * scene.add(avatar.group);
+ * avatar.update(deltaTime, globeGroup);
+ * avatar.setPalette('#6ad7ff', '#12376a'); // Update colors
+ * ```
+ */
 export class Avatar {
+  /**
+   * Creates a new procedural 3D character.
+   * Builds geometry and materials, ready to be added to the scene.
+   */
   constructor() {
     this.group = new THREE.Group();
     this.group.name = 'AvatarRoot';
@@ -10,6 +35,18 @@ export class Avatar {
     this.timeAccumulator = 0;
   }
 
+  /**
+   * Creates PBR material palette for the avatar's body parts.
+   * Materials are stored as instance properties for dynamic color updates.
+   *
+   * @returns {Object} Material dictionary
+   * @returns {THREE.MeshStandardMaterial} return.suit - Main body/arms (theme-responsive)
+   * @returns {THREE.MeshStandardMaterial} return.trim - Belt/legs accent (theme-responsive)
+   * @returns {THREE.MeshStandardMaterial} return.skin - Head/face (static)
+   * @returns {THREE.MeshStandardMaterial} return.hair - Hair cap (theme-responsive)
+   * @returns {THREE.MeshStandardMaterial} return.boots - Footwear (static)
+   * @private
+   */
   createMaterials() {
     return {
       suit: new THREE.MeshStandardMaterial({
@@ -40,6 +77,23 @@ export class Avatar {
     };
   }
 
+  /**
+   * Constructs the avatar's 3D geometry hierarchy.
+   *
+   * Geometry breakdown:
+   * - Torso: Capsule (body mass)
+   * - Belt: Torus (waist accent)
+   * - Head: Sphere (skull)
+   * - Hair: Hemisphere (hair cap)
+   * - Face: Plane with procedural texture
+   * - Legs: 2x Capsules
+   * - Boots: 2x Cylinders
+   * - Arms: 2x Capsules
+   *
+   * All meshes are parented to `this.core` for animation transforms.
+   *
+   * @private
+   */
   buildAvatar() {
     this.core = new THREE.Group();
     this.core.name = 'AvatarCore';
@@ -124,6 +178,18 @@ export class Avatar {
     this.group.add(this.core);
   }
 
+  /**
+   * Procedurally generates a simple face texture on a canvas.
+   *
+   * Features:
+   * - Two eyes (filled circles with highlights)
+   * - Smile (quadratic curve)
+   *
+   * The texture is applied to a plane mesh positioned in front of the head sphere.
+   *
+   * @returns {THREE.CanvasTexture} Face texture with transparency
+   * @private
+   */
   createFaceTexture() {
     const size = 256;
     const canvas = document.createElement('canvas');
@@ -163,6 +229,21 @@ export class Avatar {
     return texture;
   }
 
+  /**
+   * Updates the avatar's position and idle animation each frame.
+   *
+   * Animation effects:
+   * - Vertical bobbing (sine wave, frequency 4 Hz)
+   * - Sideways swaying/tilting (sine wave, frequency 2 Hz)
+   * - Counter-rotation to parent (always faces camera)
+   *
+   * The avatar is positioned relative to the globe's Y position,
+   * standing on top of it.
+   *
+   * @param {number} delta - Time elapsed since last frame (seconds)
+   * @param {THREE.Object3D} parent - Parent object (globe group) for position reference
+   * @public
+   */
   update(delta, parent) {
     if (!parent) return;
     this.timeAccumulator += delta;
@@ -175,6 +256,19 @@ export class Avatar {
     this.core.rotation.z = tiltAmount;
   }
 
+  /**
+   * Updates the avatar's color palette to match the active location theme.
+   *
+   * Color mapping:
+   * - Primary color → Suit + Hair (darkened)
+   * - Accent color → Belt/Trim + Legs
+   *
+   * Uses color lerping for smooth transitions (not instant jumps).
+   *
+   * @param {string} primaryHex - Primary theme color (hex format, e.g., "#6ad7ff")
+   * @param {string} accentHex - Accent theme color (hex format, e.g., "#12376a")
+   * @public
+   */
   setPalette(primaryHex, accentHex) {
     if (primaryHex) {
       const color = new THREE.Color(primaryHex);
