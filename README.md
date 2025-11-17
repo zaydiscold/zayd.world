@@ -1,60 +1,216 @@
-# Zayd.world
+# FROSTBITE
 
-An interactive 3D portfolio prototype where a stylised explorer jogs across a rotating globe. Each region on the globe maps to a zone in the portfolio, powering playful navigation without sacrificing clarity or performance.
+A bold, neobrutalist blog website for sharing notes, writing, recipes, and creative chaos. Built with vibrant colors, thick borders, smooth animations, and an unapologetically loud design philosophy.
+
+## Features
+
+### Neobrutalist Design Philosophy
+- **Bold Color Palette**: Custom color system with 7 vibrant colors (pink, blue, yellow, purple, green, orange, cyan)
+- **Thick Black Borders**: 4px borders on all interactive elements
+- **Brutal Shadows**: Custom offset box shadows (8px, 12px, 16px) that move on hover
+- **Sharp Edges**: No subtle rounded corners - geometric and bold
+- **High Contrast**: Black text on bright backgrounds for maximum impact
+
+### Advanced Animations
+- **Scroll-Triggered Animations**: Elements slide in from different directions as you scroll
+- **Parallax Floating Shapes**: Decorative shapes that move at different speeds
+- **Glitch Effect**: Title randomly glitches every 5 seconds with color distortion
+- **Card Stagger**: Cards animate in sequence with bounce effect
+- **Cursor Trail**: Custom pink cursor trail follows your mouse
+- **Scroll Progress Bar**: Gradient progress indicator at the top
+- **Form Animations**: Input borders animate on focus/blur
+- **Stats Counter**: Numbers animate when scrolled into view
+
+### Content Sections
+1. **Hero Section**: Eye-catching landing with neon glow effects
+2. **Notes**: Grid layout for quick thoughts and ideas with tags
+3. **Writing**: Long-form blog post previews with article cards
+4. **Recipes**: Fun recipe cards with emojis, timing, and categories
+5. **Stats**: Animated statistics showcasing your creative output
+6. **Contact**: Form with animated inputs and social media links
+
+### Responsive Design
+- Mobile-first approach
+- Collapsible mobile menu with smooth transitions
+- Responsive grid layouts that adapt to all screen sizes
+- Touch-optimized interactions
+- Custom scrollbar styling
 
 ## Tech Stack
 
-- [Vite](https://vite.dev/) for lightning-fast bundling and dev tooling.
-- [Three.js](https://threejs.org/) for all 3D rendering, lighting, and camera work.
-- [GSAP](https://greensock.com/gsap/) (placeholder) for future animation polish.
-- Vanilla DOM overlay for UI panels so 3D and content can evolve independently.
+- **[Vite](https://vite.dev/)** - Lightning-fast build tool and dev server
+- **[Tailwind CSS v4](https://tailwindcss.com/)** - Utility-first CSS with custom theme
+- **[GSAP](https://greensock.com/gsap/)** - Professional-grade animation library
+- **[GSAP ScrollTrigger](https://greensock.com/scrolltrigger/)** - Scroll-based animations
+- **Vanilla JavaScript** - No framework bloat, just modern ES6+
 
 ## Getting Started
 
+### Installation
+
 ```bash
 npm install
+```
+
+### Development
+
+```bash
 npm run dev
 ```
 
-The dev server opens on `http://localhost:5173`. Any change inside `src/` or `public/` will hot-reload.
+The dev server opens at `http://localhost:5173` with hot-reload enabled.
 
-Run `npm run build` to generate a production bundle in `dist/`.
+### Production Build
+
+```bash
+npm run build
+```
+
+Generates optimized production bundle in `dist/`.
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
 
 ## Project Structure
 
 ```
-public/                 Static assets served as-is
-  ├── assets/           Textures, models, audio (placeholders today)
-  └── styles/           Global, non-bundled CSS
-src/                    Main application code
-  ├── app.js            Bootstraps renderer, scene, and systems
-  ├── main.js           Entry point that instantiates the app
-  ├── components/       Modular 3D + UI systems (globe, avatar, UI overlay, controls)
-  ├── locations/        Self-contained “location” capsules with copy + theming
-  ├── utils/            Helpers such as physics smoothing + asset loaders
-  └── shaders/          Reserved for custom GLSL (empty for now)
+├── index.html              Main HTML file with all sections
+├── src/
+│   ├── style.css          Tailwind + custom CSS with animations
+│   └── main.js            GSAP animations and interactions
+├── tailwind.config.js     Tailwind v4 theme configuration
+├── postcss.config.js      PostCSS with Tailwind plugin
+├── vite.config.js         Vite configuration
+└── package.json           Dependencies and scripts
 ```
 
-Key modules ship with clear seams so visuals/content can be swapped:
+## Customization Guide
 
-- `components/Globe.js` owns all planet visuals.
-- `components/Avatar.js` encapsulates the traveller and movement flavour.
-- `components/Zones.js` links rotation to content zones exported from `locations/`.
-- `components/UI.js` handles the overlay copy based on the active zone.
-- `components/Controls.js` is input-agnostic, exposing rotation deltas.
+### Colors
 
-## Roadmap Highlights
+Edit the color theme in `src/style.css`:
 
-1. Replace placeholder meshes with Blender-authored models and custom materials.
-2. Expand `src/locations` entries to feed richer content (links, media, actions).
-3. Add GSAP timelines for avatar run cycles, camera easing, and UI transitions.
-4. Implement mobile-specific affordances (touch joystick, reduced post-processing).
-5. Integrate deployment workflow (Vercel or Netlify) with domain routing for `zayd.world`.
+```css
+@theme {
+  --color-neo-pink: #FF6B9D;
+  --color-neo-blue: #4D96FF;
+  --color-neo-yellow: #FFD93D;
+  --color-neo-purple: #A78BFA;
+  --color-neo-green: #6BCB77;
+  --color-neo-orange: #FF8551;
+  --color-neo-cyan: #00D9FF;
+}
+```
 
-## Asset Workflow
+### Shadows
 
-All external assets land in `public/assets/` so they can be versioned and hot-swapped without touching the render logic. Use the helper in `utils/loader.js` for asynchronous texture/model loading and cache reuse.
+Adjust shadow offsets in `src/style.css`:
+
+```css
+--shadow-brutal: 8px 8px 0px 0px #000;
+--shadow-brutal-lg: 12px 12px 0px 0px #000;
+--shadow-brutal-xl: 16px 16px 0px 0px #000;
+```
+
+### Fonts
+
+Default fonts are Space Grotesk and Space Mono from Google Fonts. Change them in `src/style.css`:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Your+Font&display=swap');
+
+@theme {
+  --font-space: 'Your Font', sans-serif;
+  --font-mono: 'Your Mono Font', monospace;
+}
+```
+
+### Animation Timing
+
+Adjust animation speeds in `src/main.js`:
+
+```javascript
+// Scroll animation duration
+duration: 1,  // Change this value (in seconds)
+
+// Glitch effect interval
+setInterval(titleGlitch, 5000);  // Change 5000 to your preferred milliseconds
+```
+
+### Content
+
+All content is directly in `index.html`. Edit sections to add your own:
+
+- **Notes**: Line 110-151
+- **Writing**: Line 172-237
+- **Recipes**: Line 252-323
+- **Contact**: Line 361-401
+
+## Animation Classes
+
+Use these classes in HTML to trigger scroll animations:
+
+- `.slide-in-up` - Slides up from bottom
+- `.slide-in-left` - Slides in from left
+- `.slide-in-right` - Slides in from right
+- `.fade-in` - Simple fade in
+- `.floating` - Continuous floating animation
+- `.glitch` - Glitch effect on hover/interval
+
+## Component Classes
+
+### Buttons
+```html
+<button class="brutal-btn bg-neo-pink text-white shadow-brutal">
+  Click Me
+</button>
+```
+
+### Cards
+```html
+<div class="brutal-card p-6 bg-white">
+  Card content
+</div>
+```
+
+### Section Titles
+```html
+<h2 class="section-title text-white">
+  Section Name
+</h2>
+```
+
+## Browser Support
+
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## Performance Notes
+
+- GSAP animations use GPU acceleration
+- ScrollTrigger efficiently manages scroll listeners
+- Cursor trail uses requestAnimationFrame for smooth 60fps
+- Tailwind purges unused CSS in production
+- All animations respect prefers-reduced-motion (can be added)
+
+## Deployment
+
+Build for production and deploy the `dist/` folder to:
+
+- **Vercel**: `vercel deploy`
+- **Netlify**: Drag and drop `dist/` folder
+- **GitHub Pages**: Push `dist/` contents to `gh-pages` branch
+- **Any static host**: Upload `dist/` contents
+
+## License
+
+Built with chaos and love - 2025
 
 ---
 
-The current build is intentionally lightweight: it gets the scene, controls, zones, and overlay in place. From here we can iterate quickly on visuals, motion language, and portfolio content.
+**FROSTBITE** - Where Creativity Meets Chaos
